@@ -7,15 +7,52 @@
 
 import SwiftUI
 
-struct ContentView: View {
-    var body: some View {
-        VStack {
-            Image(systemName: "globe")
-                .imageScale(.large)
-                .foregroundStyle(.tint)
-            Text("Hello, world!")
+enum Experiment: String, CaseIterable, Identifiable {
+    case detentSlider
+
+    var id: String { rawValue }
+
+    var title: String {
+        switch self {
+        case .detentSlider: return "Detent Slider"
         }
-        .padding()
+    }
+
+    var icon: String {
+        switch self {
+        case .detentSlider: return "slider.horizontal.3"
+        }
+    }
+}
+
+struct ContentView: View {
+    @State private var selection: Experiment? = .detentSlider
+
+    var body: some View {
+        NavigationSplitView {
+            List(Experiment.allCases, selection: $selection) { experiment in
+                Label(experiment.title, systemImage: experiment.icon)
+                    .tag(experiment)
+            }
+            .navigationTitle("thrum")
+        } detail: {
+            if let selection {
+                destination(for: selection)
+            } else {
+                ContentUnavailableView(
+                    "Pick an experiment",
+                    systemImage: "hand.tap",
+                    description: Text("Choose one from the sidebar to feel it.")
+                )
+            }
+        }
+    }
+
+    @ViewBuilder
+    private func destination(for experiment: Experiment) -> some View {
+        switch experiment {
+        case .detentSlider: DetentSliderDemo()
+        }
     }
 }
 
