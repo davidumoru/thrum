@@ -10,6 +10,7 @@ import SwiftUI
 enum Experiment: String, CaseIterable, Identifiable {
     case detentSlider
     case snapToGrid
+    case hapticPads
 
     var id: String { rawValue }
 
@@ -17,6 +18,7 @@ enum Experiment: String, CaseIterable, Identifiable {
         switch self {
         case .detentSlider: return "Detent Slider"
         case .snapToGrid:   return "Snap to Grid"
+        case .hapticPads:   return "Haptic Pads"
         }
     }
 
@@ -24,6 +26,7 @@ enum Experiment: String, CaseIterable, Identifiable {
         switch self {
         case .detentSlider: return "slider.horizontal.3"
         case .snapToGrid:   return "square.grid.3x3"
+        case .hapticPads:   return "dot.radiowaves.left.and.right"
         }
     }
 }
@@ -56,6 +59,7 @@ struct ContentView: View {
         switch experiment {
         case .detentSlider: DetentSliderDemo()
         case .snapToGrid:   SnapToGridDragDemo()
+        case .hapticPads:   HapticPadsDemo()
         }
     }
 }
