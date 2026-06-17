@@ -81,14 +81,31 @@ private struct DetentSlider: View {
                         DragGesture(minimumDistance: 0)
                             .onChanged { value in
                                 let raw = (value.location.x - knobSize / 2) / step
-                                let newNotch = min(max(Int(raw.rounded()), 0), notchCount)
-                                if newNotch != notch {
-                                    notch = newNotch
-                                    Haptic.play(.levelChange)
-                                }
+                                setNotch(Int(raw.rounded()))
                             }
                     )
             }
+            .focusable()
+            .onKeyPress(.leftArrow) { setNotch(notch - 1); return .handled }
+            .onKeyPress(.rightArrow) { setNotch(notch + 1); return .handled }
+            .accessibilityElement()
+            .accessibilityLabel("Detent slider")
+            .accessibilityValue("\(notch) of \(notchCount)")
+            .accessibilityAdjustableAction { direction in
+                switch direction {
+                case .increment: setNotch(notch + 1)
+                case .decrement: setNotch(notch - 1)
+                @unknown default: break
+                }
+            }
+        }
+    }
+
+    private func setNotch(_ value: Int) {
+        let clamped = min(max(value, 0), notchCount)
+        if clamped != notch {
+            notch = clamped
+            Haptic.play(.levelChange)
         }
     }
 }

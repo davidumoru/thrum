@@ -12,6 +12,9 @@ struct thrumApp: App {
     var body: some Scene {
         WindowGroup {
             ContentView()
+                .frame(minWidth: 720, minHeight: 520)
         }
+        .windowResizability(.contentMinSize)
+        .defaultSize(width: 900, height: 640)
     }
 }

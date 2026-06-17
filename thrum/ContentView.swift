@@ -8,6 +8,7 @@
 import SwiftUI
 
 enum Experiment: String, CaseIterable, Identifiable {
+    case welcome
     case detentSlider
     case snapToGrid
     case hapticPads
@@ -15,8 +16,12 @@ enum Experiment: String, CaseIterable, Identifiable {
 
     var id: String { rawValue }
 
+    /// Every case except the welcome screen.
+    static var demos: [Experiment] { allCases.filter { $0 != .welcome } }
+
     var title: String {
         switch self {
+        case .welcome:      return "Welcome"
         case .detentSlider: return "Detent Slider"
         case .snapToGrid:   return "Snap to Grid"
         case .hapticPads:   return "Haptic Pads"
@@ -26,6 +31,7 @@ enum Experiment: String, CaseIterable, Identifiable {
 
     var icon: String {
         switch self {
+        case .welcome:      return "hand.wave"
         case .detentSlider: return "slider.horizontal.3"
         case .snapToGrid:   return "square.grid.3x3"
         case .hapticPads:   return "dot.radiowaves.left.and.right"
@@ -35,7 +41,7 @@ enum Experiment: String, CaseIterable, Identifiable {
 }
 
 struct ContentView: View {
-    @State private var selection: Experiment? = .detentSlider
+    @State private var selection: Experiment? = .welcome
 
     var body: some View {
         NavigationSplitView {
@@ -60,6 +66,7 @@ struct ContentView: View {
     @ViewBuilder
     private func destination(for experiment: Experiment) -> some View {
         switch experiment {
+        case .welcome:      WelcomeView()
         case .detentSlider: DetentSliderDemo()
         case .snapToGrid:   SnapToGridDragDemo()
         case .hapticPads:   HapticPadsDemo()
