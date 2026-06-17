@@ -105,7 +105,7 @@ private struct DetentSlider: View {
         let clamped = min(max(value, 0), notchCount)
         if clamped != notch {
             notch = clamped
-            Haptic.play(.levelChange)
+            Haptic.play(.levelChange, at: .drawCompleted)
         }
     }
 }

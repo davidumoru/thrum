@@ -40,10 +40,13 @@ enum Haptic {
         }
     }
 
-    static func play(_ pattern: Pattern) {
+    static func play(
+        _ pattern: Pattern,
+        at time: NSHapticFeedbackManager.PerformanceTime = .now
+    ) {
         NSHapticFeedbackManager.defaultPerformer.perform(
             pattern.systemPattern,
-            performanceTime: .now
+            performanceTime: time
         )
     }
 }

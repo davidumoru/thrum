@@ -83,7 +83,7 @@ private struct SnapGrid: View {
                                 if newCol != col || newRow != row {
                                     col = newCol
                                     row = newRow
-                                    Haptic.play(.alignment)
+                                    Haptic.play(.alignment, at: .drawCompleted)
                                 }
                             }
                     )
