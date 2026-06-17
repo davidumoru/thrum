@@ -11,6 +11,7 @@ enum Experiment: String, CaseIterable, Identifiable {
     case detentSlider
     case snapToGrid
     case hapticPads
+    case textures
 
     var id: String { rawValue }
 
@@ -19,6 +20,7 @@ enum Experiment: String, CaseIterable, Identifiable {
         case .detentSlider: return "Detent Slider"
         case .snapToGrid:   return "Snap to Grid"
         case .hapticPads:   return "Haptic Pads"
+        case .textures:     return "Textures"
         }
     }
 
@@ -27,6 +29,7 @@ enum Experiment: String, CaseIterable, Identifiable {
         case .detentSlider: return "slider.horizontal.3"
         case .snapToGrid:   return "square.grid.3x3"
         case .hapticPads:   return "dot.radiowaves.left.and.right"
+        case .textures:     return "waveform.path"
         }
     }
 }
@@ -60,6 +63,7 @@ struct ContentView: View {
         case .detentSlider: DetentSliderDemo()
         case .snapToGrid:   SnapToGridDragDemo()
         case .hapticPads:   HapticPadsDemo()
+        case .textures:     TexturesDemo()
         }
     }
 }
