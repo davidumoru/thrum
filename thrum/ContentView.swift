@@ -9,18 +9,21 @@ import SwiftUI
 
 enum Experiment: String, CaseIterable, Identifiable {
     case detentSlider
+    case snapToGrid
 
     var id: String { rawValue }
 
     var title: String {
         switch self {
         case .detentSlider: return "Detent Slider"
+        case .snapToGrid:   return "Snap to Grid"
         }
     }
 
     var icon: String {
         switch self {
         case .detentSlider: return "slider.horizontal.3"
+        case .snapToGrid:   return "square.grid.3x3"
         }
     }
 }
@@ -52,6 +55,7 @@ struct ContentView: View {
     private func destination(for experiment: Experiment) -> some View {
         switch experiment {
         case .detentSlider: DetentSliderDemo()
+        case .snapToGrid:   SnapToGridDragDemo()
         }
     }
 }
