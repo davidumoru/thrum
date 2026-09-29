@@ -15,6 +15,20 @@ experiments you can feel.
 
 ## Run it
 
+### Option 1: Command line (build.sh)
+
+Build and launch directly from the terminal without opening Xcode:
+
+```bash
+# Build and run
+./build.sh run
+
+# Or build only (outputs to build/Build/Products/Debug/thrum.app)
+./build.sh
+```
+
+### Option 2: Xcode
+
 1. Open `thrum.xcodeproj` in Xcode.
 2. Select the `thrum` scheme and press **Run** (⌘R).
 
